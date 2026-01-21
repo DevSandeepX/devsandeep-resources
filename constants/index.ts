@@ -112,3 +112,22 @@ export const FEATURES = [
         icon: "🔄",
     },
 ];
+
+export const STATS = [
+    {
+        value: "150+",
+        label: "Tech Blogs",
+    },
+    {
+        value: "50K+",
+        label: "Monthly Readers",
+    },
+    {
+        value: "20+",
+        label: "Topics Covered",
+    },
+    {
+        value: "5+",
+        label: "Years Experience",
+    },
+];

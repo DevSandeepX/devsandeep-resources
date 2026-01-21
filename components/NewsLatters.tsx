@@ -3,7 +3,7 @@ export default function Newsletters() {
         <section className="relative overflow-hidden bg-blue-600 py-16">
 
             {/* Decorative Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-90" />
+            <div className="absolute inset-0 bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-90" />
 
             {/* Content */}
             <div className="relative z-10 mx-auto max-w-4xl px-4 text-center text-white">

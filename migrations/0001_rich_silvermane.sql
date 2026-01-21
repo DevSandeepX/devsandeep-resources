@@ -1,0 +1,1 @@
+ALTER TABLE "techs" ADD COLUMN "slug" varchar(100) NOT NULL;

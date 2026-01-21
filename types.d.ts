@@ -1,5 +1,9 @@
 type CategoryCard = {
-    slug: string,
-    title: string,
-    description: string
+    name: string;
+    id: string;
+    slug: string;
+    description: string | null;
+    imageUrl: string | null;
+    createdAt: Date;
+    updatedAt: Date;
 }

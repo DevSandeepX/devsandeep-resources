@@ -49,19 +49,15 @@ export const blog = pgTable(
         techId: uuid("tech_id")
             .references(() => tech.id, { onDelete: "cascade" })
             .notNull(),
-
         title: varchar("title", { length: 255 }).notNull(),
-
+        imageUrl: varchar("image_url", { length: 255 }).notNull(),
         slug: varchar("slug", { length: 255 })
             .notNull()
             .unique(),
-
         status: blogStatusEnum("status")
             .default("publish")
             .notNull(),
-
         description: text("description"),
-
         ...timestamps,
     },
     (table) => ({

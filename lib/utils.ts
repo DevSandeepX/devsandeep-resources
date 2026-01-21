@@ -25,3 +25,23 @@ export function generateSlug(input: string): string {
     .replace(/\s+/g, "-")                  // spaces → hyphen
     .replace(/-+/g, "-");                  // collapse multiple hyphens
 }
+
+
+type AsyncResult<T> =
+  | { success: true; data: T }
+  | { success: false; message: string }
+
+export async function asyncHandler<T>(
+  fn: () => Promise<T>
+): Promise<AsyncResult<T>> {
+  try {
+    return { success: true, data: await fn() }
+  } catch (error) {
+    console.error("[ASYNC_HANDLER_ERROR]", error)
+
+    const message =
+      error instanceof Error ? error.message : "Internal server error"
+
+    return { success: false, message }
+  }
+}

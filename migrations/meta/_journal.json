@@ -15,6 +15,13 @@
       "when": 1768976884135,
       "tag": "0001_rich_silvermane",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1769004617106,
+      "tag": "0002_daffy_thaddeus_ross",
+      "breakpoints": true
     }
   ]
 }

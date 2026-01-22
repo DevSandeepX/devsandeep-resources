@@ -1,9 +1,13 @@
+import { BlogRating } from '@/components/BlogRating'
+import { BlogRatingSkeleton } from '@/components/BlogRatingSkelton'
 import Markdown from '@/components/Markdown'
 import { db } from '@/database/db'
-import { blog, markdown } from '@/database/schema'
-import { eq } from 'drizzle-orm'
+import { blog, markdown, rating } from '@/database/schema'
+import { formateDate } from '@/lib/formatters'
+import { eq, sql } from 'drizzle-orm'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
 export default async function BlogDetailPage({ params }: {
     params: Promise<{ slug: string }>
@@ -11,9 +15,7 @@ export default async function BlogDetailPage({ params }: {
     const { slug } = await params
     console.log(slug)
     const blog = await getsingleBlog(slug)
-    if (!blog) {
-        return notFound()
-    }
+    if (!blog) { return notFound() }
     return (
         <article className='container mx-auto max-w-4xl px-4 py-12'>
             <div className='relative mb-8 aspect-[16/9] overflow-hidden rounded-xl'>
@@ -27,6 +29,9 @@ export default async function BlogDetailPage({ params }: {
 
             <header className='mb-10'>
                 <h1 className='text-3xl font-bold leading-tight sm:text-4xl'>{blog.title}</h1>
+                <Suspense fallback={<BlogRatingSkeleton />}>
+                    <BlogRating blogId={blog.id} />
+                </Suspense>
 
                 {blog.description && (
                     <p className='mt-4 text-lg text-muted-foreground'>{blog.description}</p>
@@ -34,7 +39,7 @@ export default async function BlogDetailPage({ params }: {
 
                 <div className='mt-4 text-lg text-muted-foreground'>
                     Published on{" "}
-                    {new Date(blog.createdAt).toISOString()}
+                    {formateDate(blog.createdAt)}
                 </div>
 
                 <section>
@@ -65,3 +70,18 @@ async function getsingleBlog(slug: string) {
         .limit(1)
     return result[0] ?? null
 }
+
+// async function getBlogRating(blogId: string) {
+//     const result = await db
+//         .select({
+//             avgRating: sql<number>`AVG(${rating.rating})`,
+//             totalReviews: sql<number>`COUNT(${rating.id})`,
+//         }).from(rating)
+//         .where(eq(rating.blogId, blogId))
+
+//     return {
+//         avgRating: Number(result[0]?.avgRating),
+//         totalReviews: Number(result[0]?.totalReviews),
+//     }
+
+// }

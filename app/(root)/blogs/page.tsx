@@ -54,6 +54,11 @@ async function getBlogs({ category = "", search = "" }: { category?: string, sea
         conditions.push(ilike(blog.title, `%${search}%`))
     }
 
+    const whereClause = and(
+        eq(blog.status, "publish"),
+        ...conditions
+    )
+
     return db
         .select({
             id: blog.id,
@@ -68,6 +73,6 @@ async function getBlogs({ category = "", search = "" }: { category?: string, sea
             tech,
             eq(blog.techId, tech.id)
         )
-        .where(conditions.length ? and(...conditions) : undefined)
+        .where(whereClause)
         .orderBy(desc(blog.createdAt))
 }

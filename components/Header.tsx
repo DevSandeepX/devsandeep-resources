@@ -16,7 +16,7 @@ export default function Header() {
                 </Link>
                 <nav className="hidden md:flex items-center gap-6">
                     {NAV_LINKS.map((link) => (
-                        <Link href="/" className="hover:text-blue-600 text-sm" key={link.href}>{link.label}</Link>
+                        <Link href={link.href} className="hover:text-blue-600 text-sm" key={link.href}>{link.label}</Link>
                     ))}
                 </nav>
                 <button

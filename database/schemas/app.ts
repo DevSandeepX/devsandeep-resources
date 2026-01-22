@@ -125,13 +125,10 @@ export const rating = pgTable(
         blogId: uuid("blog_id")
             .references(() => blog.id, { onDelete: "cascade" })
             .notNull(),
-
         userId: uuid("user_id")
             .references(() => user.id, { onDelete: "cascade" })
             .notNull(),
-
         rating: numeric("rating", { precision: 2, scale: 1 }).notNull(),
-        review: text("review"),
 
         ...timestamps,
     },
@@ -145,18 +142,32 @@ export const rating = pgTable(
     })
 )
 
+export const review = pgTable('reviews', {
+    id: uuid("id").primaryKey().defaultRandom(),
+
+    blogId: uuid("blog_id")
+        .references(() => blog.id, { onDelete: "cascade" })
+        .notNull(),
+
+    userId: uuid("user_id")
+        .references(() => user.id, { onDelete: "cascade" })
+        .notNull(),
+    review: text("review"),
+    ...timestamps
+})
+
 export const techRelations = relations(tech, ({ many }) => ({
     blogs: many(blog),
 }))
 
 export const blogRelations = relations(blog, ({ many }) => ({
     markdowns: many(markdown),
-    comments: many(comment),
+    reviews: many(review),
     ratings: many(rating),
 }))
 
 export const userRelations = relations(user, ({ many }) => ({
-    comments: many(comment),
+    reviews: many(review),
     ratings: many(rating),
 }))
 

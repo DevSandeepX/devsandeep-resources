@@ -22,6 +22,13 @@
       "when": 1769004617106,
       "tag": "0002_daffy_thaddeus_ross",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1769064268484,
+      "tag": "0003_mighty_killmonger",
+      "breakpoints": true
     }
   ]
 }

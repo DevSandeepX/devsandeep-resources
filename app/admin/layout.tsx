@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import Header from "@/components/Header";
-import FilterHeader from "@/components/Filter";
 import Sidebar from "@/components/admin/Sidebar";
 import AdminHeader from "@/components/admin/Header";
 

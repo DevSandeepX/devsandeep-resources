@@ -4,6 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Search } from "./admin/Search";
 
 type FilterHeaderClientProps = {
     data: {
@@ -63,6 +64,8 @@ export default function FilterHeaderClient({ data }: FilterHeaderClientProps) {
                     {item.name}
                 </Button>
             ))}
+
+            <Search />
         </div>
     );
 }

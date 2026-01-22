@@ -1,4 +1,5 @@
 "use client"
+
 import { SearchIcon } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -8,30 +9,42 @@ export function Search() {
     const pathname = usePathname()
     const router = useRouter()
     const params = useSearchParams()
-    const [searchText, setSearchText] = useState("")
+
+    const [searchText, setSearchText] = useState(
+        params.get("search") ?? ""
+    )
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            const newParam = new URLSearchParams(params)
-            if (searchText == "") {
-                newParam.delete("search")
+        const timeout = setTimeout(() => {
+            const newParams = new URLSearchParams(params.toString())
+
+            if (!searchText) {
+                newParams.delete("search")
             } else {
-                newParam.set("search", searchText)
+                newParams.set("search", searchText)
             }
-            router.push(`${pathname}?${newParam}`)
+
+            router.push(`${pathname}?${newParams.toString()}`)
         }, 300)
 
-        return () => clearInterval(intervalId)
+        return () => clearTimeout(timeout)
+    }, [searchText, pathname, params, router])
 
-    }, [searchText])
     return (
-        <div className="relative w-full max-w-sm">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <div className="relative w-full max-w-sm rounded!">
+            <SearchIcon className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+
             <Input
-                type="text"
-                placeholder="Search..."
+                value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
-                className="w-full rounded-lg border bg-background px-9 text-sm focus:outline-none"
+                placeholder="Search..."
+                className="
+                    rounded-full
+                    bg-transparent
+                    px-6
+                    focus-visible:ring-0
+                    focus-visible:ring-offset-0
+                "
             />
         </div>
     )

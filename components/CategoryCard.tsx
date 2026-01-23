@@ -16,7 +16,7 @@ export default function CategoryCard({ slug, name, imageUrl, description }: Cate
                     {name}
                 </h3>
             </div>
-            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
                 {description}
             </p>
         </Link>

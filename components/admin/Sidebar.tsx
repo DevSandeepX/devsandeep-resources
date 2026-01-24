@@ -4,7 +4,7 @@ const ADMIN_LINKS = [
     { name: "Dashboard", href: "/admin" },
     { name: "Blogs", href: "/admin/blogs" },
     { name: "Users", href: "/admin/users" },
-    { name: "Settings", href: "/admin/settings" },
+    { name: "Categories", href: "/admin/categories" },
 ]
 
 export default function Sidebar() {

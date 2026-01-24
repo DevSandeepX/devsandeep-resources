@@ -1,41 +1,33 @@
-"use client";
-
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
 import { NAV_LINKS } from "@/constants";
-
+import { AuthButton } from "@/services/clerk/components/AuthButton";
+import AdminLink from "./admin/AdminLink";
 
 export default function Header() {
-    const [open, setOpen] = useState(false);
 
     return (
         <header className="fixed top-0 z-50 w-full border-b bg-white dark:bg-black">
             <div className="container mx-auto flex items-center justify-between px-4 py-4">
-                <Link href="/" className="text-2xl font-bold text-blue-600">
-                    DevSandeepX
-                </Link>
+                <div className="flex gap-4">
+                    <Link href="/" className="text-2xl font-bold text-blue-600">
+                        DevSandeepX
+                    </Link>
+                    <AdminLink />
+                </div>
                 <nav className="hidden md:flex items-center gap-6">
+
                     {NAV_LINKS.map((link) => (
                         <Link href={link.href} className="hover:text-blue-600 text-sm" key={link.href}>{link.label}</Link>
                     ))}
-                </nav>
-                <button
-                    onClick={() => setOpen(!open)}
-                    className="md:hidden text-2xl"
-                >
-                    ☰
-                </button>
-            </div>
-            {open && (
-                <div className="md:hidden border-t bg-white dark:bg-black">
-                    <nav className="flex flex-col gap-4 p-4">
-                        {NAV_LINKS.map((link) => (
-                            <Link className="text-sm" href="/" key={link.href} onClick={() => setOpen(false)}>{link.label}</Link>
-                        ))}
 
-                    </nav>
-                </div>
-            )}
+                    <AuthButton />
+                </nav>
+
+            </div>
+
         </header>
     );
 }
+
+

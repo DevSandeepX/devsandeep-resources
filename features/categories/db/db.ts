@@ -1,7 +1,8 @@
 import { db } from "@/database/db";
 import { tech } from "@/database/schema";
 import { NewTech } from "@/database/schemas/types";
-import { desc, eq } from "drizzle-orm";
+import { count, desc, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 export async function insertCategoryDb(data: NewTech) {
     try {
@@ -43,6 +44,7 @@ export async function deleteCategoryDb(id: string) {
             throw new Error("Category not found")
         }
 
+        revalidatePath("/categories")
         return category
     } catch (error) {
         console.error("Delete category DB error:", error)
@@ -60,4 +62,24 @@ export async function getCategory(id: string) {
     return await db.query.tech.findFirst({
         where: eq(tech.id, id),
     })
+}
+
+export async function getCategoriesCustomeField() {
+    return await db.query.tech.findMany({
+        columns: { id: true, name: true },
+        orderBy: desc(tech.createdAt),
+    })
+}
+
+export async function getTotalCategories() {
+    try {
+        const result = await db
+            .select({ total: count() })
+            .from(tech)
+
+        return result[0]?.total ?? 0
+    } catch (error) {
+        console.error("Error fetching total categories:", error)
+        throw new Error("Failed to get total categories")
+    }
 }

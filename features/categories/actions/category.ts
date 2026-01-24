@@ -54,12 +54,8 @@ export async function updateCategory(
 
 export async function deleteCategory(
     id: string,
-
 ) {
-
-
     await deleteCategoryDb(id)
-
     return {
         success: true,
         message: "Category Deleted successfully",

@@ -10,13 +10,13 @@ type UserTableProps = {
         createdAt: Date
         name: string;
         email: string;
-        profileImageUrl: string | null;
+        imageUrl: string | null;
 
     }[]
 }
 
 const columns: Column<Item>[] = [
-    { name: "Image", accessor: "profileImageUrl", },
+    { name: "Image", accessor: "imageUrl", },
     { name: "Name", accessor: "name", },
     { name: "Email", accessor: "email", },
     { name: "Created", accessor: "createdAt", },
@@ -27,15 +27,15 @@ type Item = {
     createdAt: Date
     name: string;
     email: string;
-    profileImageUrl: string | null;
+    imageUrl: string | null;
 }
 
 function renderRow(item: Item) {
     return <TableRow key={item.id}>
         <TableCell>
-            {item.profileImageUrl && (
+            {item.imageUrl && (
                 <Image
-                    src={item.profileImageUrl}
+                    src={item.imageUrl}
                     alt={item.name}
                     width={48}
                     height={48}

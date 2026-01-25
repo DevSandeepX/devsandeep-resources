@@ -1,7 +1,7 @@
 import { CategoryForm } from "@/features/categories/components/CaregoryForm";
 import { getCategory } from "@/features/categories/db/db";
 import { notFound } from "next/navigation";
-
+export const dynamic = "force-dynamic";
 export default async function EditCategoryPage({ params }: {
     params: Promise<{ catId: string }>
 }) {

@@ -7,7 +7,7 @@ import CategoryTable from "@/features/categories/components/CategoryTable"
 import { getCategories } from "@/features/categories/db/db"
 import { Plus } from "lucide-react"
 import Link from "next/link"
-
+export const dynamic = "force-dynamic";
 export default async function CategoriesPage() {
     const categories = await getCategories()
 

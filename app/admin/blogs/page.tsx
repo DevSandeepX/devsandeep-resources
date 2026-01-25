@@ -4,7 +4,8 @@ import BlogTable from '@/features/blogs/components/BlogTable'
 import { getBlogs } from '@/features/blogs/db/blogs'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import { Suspense } from 'react'
+export const dynamic = "force-dynamic";
 
 export default async function BlogsPage() {
     const blogs = await getBlogs()
@@ -18,7 +19,9 @@ export default async function BlogsPage() {
                     </Link>
                 </Button>
             </PageHeader>
-            <BlogTable blogs={blogs} />
+            <Suspense fallback={<div className='w-full h-34 bg-muted rounded' />}>
+                <BlogTable blogs={blogs} />
+            </Suspense>
         </div>
     )
 }

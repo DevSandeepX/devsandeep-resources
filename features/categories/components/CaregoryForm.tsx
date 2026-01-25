@@ -37,7 +37,9 @@ type Category = {
 }
 
 export function CategoryForm({ category }: { category?: Category }) {
+
     const router = useRouter()
+    
     const form = useForm<z.infer<typeof categorySchema>>({
         resolver: zodResolver(categorySchema),
         defaultValues: {

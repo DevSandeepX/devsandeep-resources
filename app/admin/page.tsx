@@ -1,8 +1,9 @@
 import BlogStateSuspense from "@/components/admin/BlogStateSuspense";
 import TechStateSuspense from "@/components/admin/TechStateSuspense";
 import UserStateSuspense from "@/components/admin/UserStateSuspense";
+export const dynamic = "force-dynamic";
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
 
     return (
         <div className="container mx-auto">
